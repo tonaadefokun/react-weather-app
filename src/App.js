@@ -6,19 +6,18 @@ export default function App() {
   return (
     <div className="App">
       <div className="container">
-        <Weather />
-        <p>
-          <footer>
-            The project was coded by Adefokun Adetona and it's open-sourced on:{" "}
-            <a
-              href="https://github.com/tonaadefokun/weather-app-react"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
-          </footer>
-        </p>
+        <Weather defaultCity="Ilesa" />
+
+        <footer>
+          The project was coded by Adefokun Adetona and it's open-sourced on:{" "}
+          <a
+            href="https://github.com/tonaadefokun/weather-app-react"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+        </footer>
       </div>
     </div>
   );
