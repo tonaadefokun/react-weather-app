@@ -7,7 +7,6 @@ export default function App() {
     <div className="App">
       <div className="container">
         <Weather defaultCity="Ilesa" />
-
         <footer>
           The project was coded by Adefokun Adetona and it's open-sourced on:{" "}
           <a

@@ -6,6 +6,7 @@ import FormatedDate from "./FormatedDate";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
+  const [citi, setCiti] = useState(props.defaultCity);
 
   function handleResponse(response) {
     console.log(response.data);
@@ -20,11 +21,27 @@ export default function Weather(props) {
       date: new Date(response.data.dt * 1000),
     });
   }
+  function search(params) {
+    const unit = "metric";
+    const appId = "bde55a9683d327ace2ee438777d1956f";
+    const city = citi;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=${unit}`;
+    axios.get(url).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCiti(event.target.value);
+  }
 
   if (weatherData.ready) {
     return (
       <div className="weather">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-9">
               <input
@@ -32,6 +49,7 @@ export default function Weather(props) {
                 placeholder="Search for a city"
                 className="form-control"
                 autoFocus="on"
+                onChange={handleCityChange}
               />
             </div>
             <div className="col-3">
@@ -72,20 +90,18 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const unit = "metric";
-    const appId = "bde55a9683d327ace2ee438777d1956f";
-    const city = props.defaultCity;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=${unit}`;
-    axios.get(url).then(handleResponse);
+    search();
 
     return (
-      <Loader
-        type="ThreeDots"
-        color="#00BFFF"
-        height={100}
-        width={100}
-        timeout={20000} //20 secs
-      />
+      <div>
+        <Loader
+          type="ThreeDots"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={20000} //20 secs
+        />
+      </div>
     );
   }
 }
