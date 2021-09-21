@@ -3,6 +3,7 @@ import "./weather.css";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 import FormatedDate from "./FormatedDate";
+import WeatherTemp from "./WeatherTemp";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -75,10 +76,11 @@ export default function Weather(props) {
               alt={weatherData.description}
               className="float-left"
             />
-            <span className="temperature">
+            <WeatherTemp celsius={weatherData.temperature} />
+            {/* <span className="temperature">
               {Math.round(weatherData.temperature)}
             </span>
-            <span className="unit">°C</span>
+            <span className="unit">°C</span> */}
           </div>
           <div className="col-6">
             <ul>
